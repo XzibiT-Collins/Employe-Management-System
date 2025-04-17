@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeemanagementsystem.MainController">
+    <children>
+        <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Create Employee">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="id" layoutX="112.0" layoutY="106.0" />
+                                <Label layoutX="112.0" layoutY="89.0" text="ID:" />
+                                <TextField fx:id="name" layoutX="112.0" layoutY="163.0" />
+                                <Label layoutX="111.0" layoutY="146.0" text="Name" />
+                                <TextField fx:id="department" layoutX="113.0" layoutY="220.0" />
+                                <Label layoutX="112.0" layoutY="203.0" text="Department" />
+                                <TextField fx:id="salary" layoutX="269.0" layoutY="106.0" />
+                                <Label layoutX="268.0" layoutY="89.0" text="Salary" />
+                                <TextField fx:id="performanceRating" layoutX="270.0" layoutY="163.0" />
+                                <Label layoutX="269.0" layoutY="146.0" text="Performance Rating" />
+                                <TextField fx:id="yearsOfExperience" layoutX="270.0" layoutY="220.0" />
+                                <Label layoutX="269.0" layoutY="203.0" text="Years of Experience" />
+                                <CheckBox fx:id="isActive" layoutX="428.0" layoutY="110.0" mnemonicParsing="false" text="isActive" />
+                                <Button layoutX="244.0" layoutY="277.0" mnemonicParsing="false" onAction="#handleEmployeeCreation" text="Create Employee" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Manage Employees">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Text layoutX="241.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Employee Info" />
+                                <TextField fx:id="updateID" layoutX="25.0" layoutY="48.0" />
+                                <Label layoutX="25.0" layoutY="31.0" text="ID:" />
+                                <Label layoutX="185.0" layoutY="31.0" text="Field" />
+                                <Button layoutX="226.0" layoutY="104.0" mnemonicParsing="false" onAction="#handleUpdateEmployee" text="Update Employee" />
+                                <TextField fx:id="deleteID" layoutX="40.0" layoutY="221.0" />
+                                <Label layoutX="40.0" layoutY="204.0" text="ID:" />
+                                <Text layoutX="255.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Employee" />
+                                <Button layoutX="205.0" layoutY="218.0" mnemonicParsing="false" onAction="#handleDeleteEmployee" text="Delete" />
+                                <ComboBox fx:id="updateField" layoutX="180.0" layoutY="49.0" prefWidth="150.0" />
+                                <TextField fx:id="newValue" layoutX="344.0" layoutY="48.0" />
+                                <Label layoutX="344.0" layoutY="31.0" text="New Value" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Search Employee">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="searchTerm" layoutX="194.0" layoutY="35.0" />
+                                <Label layoutX="194.0" layoutY="14.0" text="Value" />
+                                <ComboBox fx:id="searchFilter" layoutX="21.0" layoutY="31.0" prefWidth="161.0" />
+                                <Label layoutX="21.0" layoutY="14.0" text="Filters" />
+                                <TableView fx:id="searchTable" layoutX="29.0" layoutY="86.0" prefHeight="275.0" prefWidth="542.0">
+                                    <columns>
+                                        <TableColumn fx:id="search_IdCol" prefWidth="42.0" text="ID" />
+                                        <TableColumn fx:id="search_NameCol" prefWidth="127.0" text="NAME" />
+                                        <TableColumn fx:id="search_DepCol" prefWidth="76.0" text="DEP" />
+                                        <TableColumn fx:id="search_YoeCol" prefWidth="70.0" text="YoE" />
+                                        <TableColumn fx:id="search_PrCol" prefWidth="68.0" text="PR" />
+                                        <TableColumn fx:id="search_SalaryCol" prefWidth="83.0" text="SALARY" />
+                                        <TableColumn fx:id="search_StatusCol" prefWidth="75.0" text="STATUS" />
+                                    </columns>
+                                </TableView>
+                                <Button layoutX="518.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleSearchEmployee" text="Search" />
+                                <TextField fx:id="minValue" layoutX="352.0" layoutY="35.0" prefHeight="25.0" prefWidth="75.0" />
+                                <TextField fx:id="maxValue" layoutX="437.0" layoutY="35.0" prefHeight="25.0" prefWidth="75.0" />
+                                <Label layoutX="352.0" layoutY="14.0" text="Min Value" />
+                                <Label layoutX="437.0" layoutY="14.0" text="Max Value" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Sort Employees">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <ComboBox fx:id="sortFilter" layoutX="199.0" layoutY="35.0" prefWidth="150.0" />
+                                <Label layoutX="199.0" layoutY="14.0" text="Sort Filters" />
+                                <TableView fx:id="sortTable" layoutX="29.0" layoutY="86.0" prefHeight="275.0" prefWidth="542.0">
+                                    <columns>
+                                        <TableColumn fx:id="sort_IdCol" prefWidth="42.0" text="ID" />
+                                        <TableColumn fx:id="sort_NameCol" prefWidth="127.0" text="NAME" />
+                                        <TableColumn fx:id="sort_DepCol" prefWidth="76.0" text="DEP" />
+                                        <TableColumn fx:id="sort_YoeCol" prefWidth="70.0" text="YoE" />
+                                        <TableColumn fx:id="sort_PrCol" prefWidth="68.0" text="PR" />
+                                        <TableColumn fx:id="sort_SalaryCol" prefWidth="83.0" text="SALARY" />
+                                        <TableColumn fx:id="sort_StatusCol" prefWidth="75.0" text="STATUS" />
+                                    </columns>
+                                </TableView>
+                                <Button layoutX="357.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleSortEmployees" text="Sort" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Employee List">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="sortTable1" prefHeight="373.0" prefWidth="600.0">
+                                    <columns>
+                                        <TableColumn fx:id="emp_IdCol" prefWidth="43.0" text="ID" />
+                                        <TableColumn fx:id="emp_NameCol" prefWidth="142.0" text="NAME" />
+                                        <TableColumn fx:id="emp_DepCol" prefWidth="100.0" text="DEP" />
+                                        <TableColumn fx:id="emp_YoeCol" prefWidth="57.0" text="YoE" />
+                                        <TableColumn fx:id="emp_PrCol" prefWidth="73.0" text="PR" />
+                                        <TableColumn fx:id="emp_SalaryCol" prefWidth="96.0" text="SALARY" />
+                                        <TableColumn fx:id="emp_StatusCol" prefWidth="85.0" text="STATUS" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

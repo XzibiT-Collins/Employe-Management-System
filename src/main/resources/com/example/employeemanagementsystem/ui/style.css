@@ -1,0 +1,195 @@
+/* Main application styling */
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-background-color: #f5f5f7;
+    -fx-font-size: 12px;
+}
+
+/* Tab styling */
+.tab-pane {
+    -fx-tab-min-width: 120px;
+}
+
+.tab {
+    -fx-background-color: #e1e1e1;
+    -fx-background-radius: 5 5 0 0;
+    -fx-padding: 5 15 5 15;
+}
+
+.tab:selected {
+    -fx-background-color: #4a86e8;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-alignment: CENTER;
+}
+
+.tab-pane > .tab-header-area {
+    -fx-padding: 5 5 0 5;
+}
+
+.tab-content-area {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+    -fx-border-radius: 0 0 5 5;
+}
+
+/* Form controls styling */
+.label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 3;
+    -fx-padding: 5;
+}
+
+.text-field:focused {
+    -fx-border-color: #4a86e8;
+    -fx-background-color: #f8f8f8;
+}
+
+.button {
+    -fx-background-color: #4a86e8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 3;
+    -fx-padding: 8 15 8 15;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #3a76d8;
+}
+
+.button:pressed {
+    -fx-background-color: #2a66c8;
+}
+
+/* Delete button specific styling */
+#handleDeleteEmployee {
+    -fx-background-color: #e74c3c;
+}
+
+#handleDeleteEmployee:hover {
+    -fx-background-color: #c0392b;
+}
+
+/* CheckBox styling */
+.check-box {
+    -fx-font-weight: bold;
+}
+
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 3;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #4a86e8;
+}
+
+/* ComboBox styling */
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 3;
+}
+
+.combo-box:focused {
+    -fx-border-color: #4a86e8;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: #f0f0f0;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #333333;
+}
+
+/* TableView styling */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 3;
+}
+
+.table-view .column-header {
+    -fx-background-color: #4a86e8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: #f0f0f0;
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #f8f8f8;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #d0e3ff;
+    -fx-text-fill: #333333;
+}
+
+/* Line styling */
+.line {
+    -fx-stroke: #cccccc;
+    -fx-stroke-width: 1;
+}
+
+/* Text styling */
+.text {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-fill: #333333;
+}
+
+/* Specific tab content styling */
+#createEmployeeTab {
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+#manageEmployeesTab {
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+#searchEmployeeTab {
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+#sortEmployeesTab {
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+#employeeListTab {
+    -fx-padding: 10;
+}
