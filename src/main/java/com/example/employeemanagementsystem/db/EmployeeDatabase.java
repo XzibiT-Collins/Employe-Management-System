@@ -1,4 +1,7 @@
 package com.example.employeemanagementsystem.db;
+import com.example.employeemanagementsystem.exceptionHandling.EmployeeNotFoundException;
+import com.example.employeemanagementsystem.exceptionHandling.InvalidDepartmentException;
+import com.example.employeemanagementsystem.exceptionHandling.InvalidSalaryException;
 import com.example.employeemanagementsystem.model.Employee;
 
 import java.util.*;
@@ -28,14 +31,14 @@ public class EmployeeDatabase<T> {
     }
 
     //Remove or delete an Employee from Map
-    public boolean removeEmployee(T employeeId){
-        if(employeeMap.containsKey(employeeId)){
-            //use Employee Key=id to remove employee from Map
-            employeeMap.remove(employeeId);
-            return true;
-        }else{
-            return false;
+    public boolean removeEmployee(T employeeId) throws EmployeeNotFoundException {
+        //throw an unchecked error when ID not found
+        if(!employeeMap.containsKey(employeeId)){
+            throw new EmployeeNotFoundException("The specified ID does not match any records.");
         }
+        //use Employee Key=id to remove employee from Map
+        employeeMap.remove(employeeId);
+        return true;
     }
 
     //Retrieve all employees
@@ -44,7 +47,7 @@ public class EmployeeDatabase<T> {
     }
 
     //Update Employee details
-    public void updateEmployeeDetails(T employeeId, String field, Object newValue){
+    public void updateEmployeeDetails(T employeeId, String field, Object newValue) throws EmployeeNotFoundException {
         //check if hashMap contains the id to be updated
         if(employeeMap.containsKey(employeeId)){
             //get employee to update
@@ -64,6 +67,10 @@ public class EmployeeDatabase<T> {
                 }
                 case "salary" -> {
                     double value = (double) newValue;
+                    //throw unchecked exception when salary is negative
+                    if(value < 0.0){
+                        throw new InvalidSalaryException("Salary cannot be negative.");
+                    }
                     emp.setSalary(value);
                 }
                 case "performancerating" -> {
@@ -82,6 +89,7 @@ public class EmployeeDatabase<T> {
                 }
             }
         }else{
+            throw new EmployeeNotFoundException("Employee with specified ID not found");
         }
     }
 
@@ -95,9 +103,15 @@ public class EmployeeDatabase<T> {
             return Collections.emptyList();
         }
         //use streams to filter and sort database
-        return employeeMap.values().stream()
+        List<Employee<T>> results = employeeMap.values().stream()
                 .filter(e -> department.equalsIgnoreCase(e.getDepartment()))
                 .toList();
+
+        //throw unchecked exception when department is unknown.
+        if(results.isEmpty()){
+            throw new InvalidDepartmentException("No employee belongs to specified department.");
+        }
+        return results;
     }
 
     //Search for employees whose name contains a search term
@@ -132,13 +146,14 @@ public class EmployeeDatabase<T> {
 
     //Search for employees within a specific salary range
     public List<Employee<T>> searchEmployeeSalaryRange(double minAmount,double maxAmount){
+        //throw unchecked exception when salary values are invalid
         //Validate amount
         if(minAmount<0.0 || maxAmount < 0.0){
-            throw new IllegalArgumentException("Amount cannot be negative");
+            throw new InvalidSalaryException("Amount cannot be negative");
         }
-        //Ensure min amount is alwas less than max amount
+        //Ensure min amount is always less than max amount
         if(minAmount>maxAmount){
-            throw new IllegalArgumentException("Minimum amount cannot be bigger than maximum amount.");
+            throw new InvalidSalaryException("Minimum amount cannot be bigger than maximum amount.");
         }
 
         //ensure employee database is not empty
@@ -179,7 +194,7 @@ public class EmployeeDatabase<T> {
     //Salary Raise for employees with over 4.5 performance Rating
     public void salaryRaise(double minRating, double raisePercentage){
         if(raisePercentage < 0.0){
-            throw new IllegalArgumentException("Operation Unsuccessful:\n Rating cannot be negative");
+            throw new InvalidSalaryException("Operation Unsuccessful:\n Rating cannot be negative");
         }
         if(employeeMap.isEmpty()){
             throw new IllegalArgumentException("Cannot perform salary raise operation on null employee List");

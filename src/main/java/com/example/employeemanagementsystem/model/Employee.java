@@ -1,4 +1,6 @@
 package com.example.employeemanagementsystem.model;
+import com.example.employeemanagementsystem.exceptionHandling.InvalidSalaryException;
+
 import java.lang.Comparable;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -65,6 +67,10 @@ public class Employee<T> implements Comparable<Employee<T>> {
     }
 
     public void setSalary(double salary){
+        //throw unchecked error when salary is less than 0.00
+        if(salary < 0.00){
+            throw new InvalidSalaryException("Salary cannot be negative");
+        }
         this.salary = salary;
     }
 
@@ -82,6 +88,11 @@ public class Employee<T> implements Comparable<Employee<T>> {
 
     //Salary raise
     public void salaryRaise(double percentage){
+        //throw an unchecked exception when percentage is <=0
+        if(percentage <= 0.0){
+            throw new InvalidSalaryException("Raise percentage cannot be less than or equal to 0.00");
+        }
+
         double raise = (this.salary)*(percentage/100); //calculate raise
         this.salary += raise;
     }
