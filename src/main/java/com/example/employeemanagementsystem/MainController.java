@@ -5,7 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import java.util.logging.Logger;
+
 import com.example.employeemanagementsystem.db.EmployeeDatabase;
+import com.example.employeemanagementsystem.exceptionHandling.EmployeeNotFoundException;
+import com.example.employeemanagementsystem.exceptionHandling.InvalidSalaryException;
 import com.example.employeemanagementsystem.model.Employee;
 import com.example.employeemanagementsystem.model.comparators.EmployeePerformanceComparator;
 import com.example.employeemanagementsystem.model.comparators.EmployeeSalaryComparator;
@@ -144,11 +148,13 @@ public class MainController {
     @FXML
     private TextField yearsOfExperience;
 
+    private static final Logger logger = Logger.getLogger(MainController.class.getName());
+
     // Database instance
     private final EmployeeDatabase<String> db = new EmployeeDatabase<>();
 
     @FXML
-    void handleDeleteEmployee(ActionEvent event) {
+    void handleDeleteEmployee(ActionEvent event) throws EmployeeNotFoundException {
         String strDelId = deleteID.getText().trim();
 
         if(strDelId.isEmpty()) {
@@ -156,15 +162,15 @@ public class MainController {
             return;
         }
 
-        boolean removed = db.removeEmployee(strDelId);
-        if(removed) {
+        try{
+            db.removeEmployee(strDelId);
             showAlert("Success", "Employee deleted successfully", Alert.AlertType.INFORMATION);
             deleteID.clear();
             //update employee list
             handlePopulateEmployeeTable();
-
-        } else {
+        }catch(Exception e){
             showAlert("Error", "Employee not found", Alert.AlertType.ERROR);
+            logger.info("An error occurred "+ e.getMessage());
         }
     }
 
@@ -203,6 +209,7 @@ public class MainController {
             showAlert("Success", "Employee created successfully", Alert.AlertType.INFORMATION);
             db.printAllEmployees();
         } catch (NumberFormatException e) {
+            logger.info(e.getMessage());
             showAlert("Error", "Invalid number format for Salary, Performance Rating, or Years of Experience", Alert.AlertType.ERROR);
         }
     }
@@ -221,7 +228,12 @@ public class MainController {
             case "Department":
                 String deptValue = searchTerm.getText().trim();
                 if(!deptValue.isEmpty()) {
-                    employeeList = db.searchEmployeeByDepartment(deptValue);
+                    try{
+                        employeeList = db.searchEmployeeByDepartment(deptValue);
+                    }catch (Exception e){
+                        logger.info(e.getMessage());
+                        showAlert("Error", "Specified department does not match any employee", Alert.AlertType.WARNING);
+                    }
                 }
                 break;
 
@@ -236,7 +248,12 @@ public class MainController {
                 try {
                     double min = minValue.getText().isEmpty() ? 0 : Double.parseDouble(minValue.getText());
                     double max = maxValue.getText().isEmpty() ? Double.MAX_VALUE : Double.parseDouble(maxValue.getText());
-                    employeeList = db.searchEmployeeSalaryRange(min, max);
+                    try{
+                        employeeList = db.searchEmployeeSalaryRange(min, max);
+                    }catch(InvalidSalaryException e){
+                        logger.info(e.getMessage());
+                        showAlert("WARNING",e.getMessage(),Alert.AlertType.WARNING);
+                    }
                 } catch (NumberFormatException e) {
                     showAlert("Error", "Invalid salary range values", Alert.AlertType.ERROR);
                 }
@@ -324,8 +341,9 @@ public class MainController {
             showAlert("Success", "Employee updated successfully", Alert.AlertType.INFORMATION);
             updateID.clear();
             newValue.clear();
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | EmployeeNotFoundException e) {
             showAlert("Error", "Invalid number format for " + str_field, Alert.AlertType.ERROR);
+            logger.info(e.getMessage());
         }
     }
 
