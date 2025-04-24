@@ -232,7 +232,7 @@ public class MainController {
                         employeeList = db.searchEmployeeByDepartment(deptValue);
                     }catch (Exception e){
                         logger.info(e.getMessage());
-                        showAlert("Error", "Specified department does not match any employee", Alert.AlertType.WARNING);
+                        showAlert("Error", e.getMessage(), Alert.AlertType.WARNING);
                     }
                 }
                 break;
@@ -240,7 +240,12 @@ public class MainController {
             case "Name":
                 String nameValue = searchTerm.getText().trim();
                 if(!nameValue.isEmpty()) {
-                    employeeList = db.searchEmployeeByName(nameValue);
+                    try{
+                        employeeList = db.searchEmployeeByName(nameValue);
+                    }catch (Exception e){
+                        logger.info(e.getMessage());
+                        showAlert("Error", e.getMessage(), Alert.AlertType.WARNING);
+                    }
                 }
                 break;
 
@@ -255,6 +260,7 @@ public class MainController {
                         showAlert("WARNING",e.getMessage(),Alert.AlertType.WARNING);
                     }
                 } catch (NumberFormatException e) {
+                    logger.info(e.getMessage());
                     showAlert("Error", "Invalid salary range values", Alert.AlertType.ERROR);
                 }
                 break;
@@ -264,7 +270,11 @@ public class MainController {
                     double min = minValue.getText().isEmpty() ? 0 : Double.parseDouble(minValue.getText());
                     employeeList = db.searchEmployeeByPerformanceRating(min);
                 } catch (NumberFormatException e) {
+                    logger.info(e.getMessage());
                     showAlert("Error", "Invalid performance rating value", Alert.AlertType.ERROR);
+                } catch (IllegalArgumentException e){
+                    logger.info(e.getMessage());
+                    showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
                 }
                 break;
         }
