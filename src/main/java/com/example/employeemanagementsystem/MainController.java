@@ -460,4 +460,14 @@ public class MainController {
         yearsOfExperience.clear();
         isActive.setSelected(false);
     }
+
+    public void handleUserCreationFormClearance(ActionEvent event) {
+        id.setText("");
+        name.setText("");
+        department.setText("");
+        salary.setText("");
+        performanceRating.setText("");
+        yearsOfExperience.setText("");
+        isActive.setSelected(false);
+    }
 }

@@ -59,7 +59,7 @@ class EmployeeDatabaseTest {
     void searchEmployeeByDepartment(){
         employeeDatabase.addEmployee(employee);
         //search employee
-        List<Employee<String>> results = employeeDatabase.searchEmployeeByDepartment("BackEnd");
+        List<Employee<String>> results = employeeDatabase.searchEmployeeByDepartment("FrontEnd");
 
         //assertions
         assertEquals(1,results.size());

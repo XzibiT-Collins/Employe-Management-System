@@ -1,133 +1,423 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeemanagementsystem.MainController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" styleClass="root-container" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeemanagementsystem.MainController">
     <children>
-        <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
-                <Tab text="Create Employee">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <!-- Main Container -->
+        <StackPane layoutX="25.0" layoutY="25.0" prefHeight="650.0" prefWidth="950.0" styleClass="main-container">
+            <children>
+                <VBox spacing="0.0">
+                    <children>
+                        <!-- Compact Header Section -->
+                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" styleClass="app-header">
                             <children>
-                                <TextField fx:id="id" layoutX="112.0" layoutY="106.0" />
-                                <Label layoutX="112.0" layoutY="89.0" text="ID:" />
-                                <TextField fx:id="name" layoutX="112.0" layoutY="163.0" />
-                                <Label layoutX="111.0" layoutY="146.0" text="Name" />
-                                <TextField fx:id="department" layoutX="113.0" layoutY="220.0" />
-                                <Label layoutX="112.0" layoutY="203.0" text="Department" />
-                                <TextField fx:id="salary" layoutX="269.0" layoutY="106.0" />
-                                <Label layoutX="268.0" layoutY="89.0" text="Salary" />
-                                <TextField fx:id="performanceRating" layoutX="270.0" layoutY="163.0" />
-                                <Label layoutX="269.0" layoutY="146.0" text="Performance Rating" />
-                                <TextField fx:id="yearsOfExperience" layoutX="270.0" layoutY="220.0" />
-                                <Label layoutX="269.0" layoutY="203.0" text="Years of Experience" />
-                                <CheckBox fx:id="isActive" layoutX="428.0" layoutY="110.0" mnemonicParsing="false" text="isActive" />
-                                <Button layoutX="244.0" layoutY="277.0" mnemonicParsing="false" onAction="#handleEmployeeCreation" text="Create Employee" />
+                                <Circle fill="#ffffff" radius="15.0" styleClass="header-icon" />
+                                <Region prefWidth="12.0" />
+                                <VBox alignment="CENTER_LEFT">
+                                    <children>
+                                        <Text fill="WHITE" text="Employee Management System" styleClass="app-title">
+                                            <font>
+                                                <Font name="System Bold" size="20.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </VBox>
                             </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Manage Employees">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Text layoutX="241.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Employee Info" />
-                                <TextField fx:id="updateID" layoutX="25.0" layoutY="48.0" />
-                                <Label layoutX="25.0" layoutY="31.0" text="ID:" />
-                                <Label layoutX="185.0" layoutY="31.0" text="Field" />
-                                <Button layoutX="226.0" layoutY="104.0" mnemonicParsing="false" onAction="#handleUpdateEmployee" text="Update Employee" />
-                                <TextField fx:id="deleteID" layoutX="40.0" layoutY="221.0" />
-                                <Label layoutX="40.0" layoutY="204.0" text="ID:" />
-                                <Text layoutX="255.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Employee" />
-                                <Button layoutX="205.0" layoutY="218.0" mnemonicParsing="false" onAction="#handleDeleteEmployee" text="Delete" />
-                                <ComboBox fx:id="updateField" layoutX="180.0" layoutY="49.0" prefWidth="150.0" />
-                                <TextField fx:id="newValue" layoutX="344.0" layoutY="48.0" />
-                                <Label layoutX="344.0" layoutY="31.0" text="New Value" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Search Employee">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <TextField fx:id="searchTerm" layoutX="194.0" layoutY="35.0" />
-                                <Label layoutX="194.0" layoutY="14.0" text="Value" />
-                                <ComboBox fx:id="searchFilter" layoutX="21.0" layoutY="31.0" prefWidth="161.0" />
-                                <Label layoutX="21.0" layoutY="14.0" text="Filters" />
-                                <TableView fx:id="searchTable" layoutX="29.0" layoutY="86.0" prefHeight="275.0" prefWidth="542.0">
-                                    <columns>
-                                        <TableColumn fx:id="search_IdCol" prefWidth="42.0" text="ID" />
-                                        <TableColumn fx:id="search_NameCol" prefWidth="127.0" text="NAME" />
-                                        <TableColumn fx:id="search_DepCol" prefWidth="76.0" text="DEP" />
-                                        <TableColumn fx:id="search_YoeCol" prefWidth="70.0" text="YoE" />
-                                        <TableColumn fx:id="search_PrCol" prefWidth="68.0" text="PR" />
-                                        <TableColumn fx:id="search_SalaryCol" prefWidth="83.0" text="SALARY" />
-                                        <TableColumn fx:id="search_StatusCol" prefWidth="75.0" text="STATUS" />
-                                    </columns>
-                                </TableView>
-                                <Button layoutX="518.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleSearchEmployee" text="Search" />
-                                <TextField fx:id="minValue" layoutX="352.0" layoutY="35.0" prefHeight="25.0" prefWidth="75.0" />
-                                <TextField fx:id="maxValue" layoutX="437.0" layoutY="35.0" prefHeight="25.0" prefWidth="75.0" />
-                                <Label layoutX="352.0" layoutY="14.0" text="Min Value" />
-                                <Label layoutX="437.0" layoutY="14.0" text="Max Value" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Sort Employees">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <ComboBox fx:id="sortFilter" layoutX="199.0" layoutY="35.0" prefWidth="150.0" />
-                                <Label layoutX="199.0" layoutY="14.0" text="Sort Filters" />
-                                <TableView fx:id="sortTable" layoutX="29.0" layoutY="86.0" prefHeight="275.0" prefWidth="542.0">
-                                    <columns>
-                                        <TableColumn fx:id="sort_IdCol" prefWidth="42.0" text="ID" />
-                                        <TableColumn fx:id="sort_NameCol" prefWidth="127.0" text="NAME" />
-                                        <TableColumn fx:id="sort_DepCol" prefWidth="76.0" text="DEP" />
-                                        <TableColumn fx:id="sort_YoeCol" prefWidth="70.0" text="YoE" />
-                                        <TableColumn fx:id="sort_PrCol" prefWidth="68.0" text="PR" />
-                                        <TableColumn fx:id="sort_SalaryCol" prefWidth="83.0" text="SALARY" />
-                                        <TableColumn fx:id="sort_StatusCol" prefWidth="75.0" text="STATUS" />
-                                    </columns>
-                                </TableView>
-                                <Button layoutX="357.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleSortEmployees" text="Sort" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Employee List">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <TableView fx:id="sortTable1" prefHeight="373.0" prefWidth="600.0">
-                                    <columns>
-                                        <TableColumn fx:id="emp_IdCol" prefWidth="43.0" text="ID" />
-                                        <TableColumn fx:id="emp_NameCol" prefWidth="142.0" text="NAME" />
-                                        <TableColumn fx:id="emp_DepCol" prefWidth="100.0" text="DEP" />
-                                        <TableColumn fx:id="emp_YoeCol" prefWidth="57.0" text="YoE" />
-                                        <TableColumn fx:id="emp_PrCol" prefWidth="73.0" text="PR" />
-                                        <TableColumn fx:id="emp_SalaryCol" prefWidth="96.0" text="SALARY" />
-                                        <TableColumn fx:id="emp_StatusCol" prefWidth="85.0" text="STATUS" />
-                                    </columns>
-                                </TableView>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
+                            <padding>
+                                <Insets left="20.0" right="20.0" />
+                            </padding>
+                        </HBox>
+
+                        <!-- Tab Container - Maximum Content Area -->
+                        <TabPane prefHeight="600.0" prefWidth="950.0" styleClass="modern-tab-pane" tabClosingPolicy="UNAVAILABLE">
+                            <tabs>
+                                <!-- CREATE EMPLOYEE TAB -->
+                                <Tab styleClass="modern-tab" text="➕ Create Employee">
+                                    <content>
+                                        <VBox spacing="20.0" styleClass="tab-content">
+                                            <padding>
+                                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                            </padding>
+                                            <children>
+                                                <!-- Page Header -->
+                                                <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="page-header">
+                                                    <children>
+                                                        <Circle fill="#4caf50" radius="18.0" styleClass="page-icon" />
+                                                        <Text fill="#2c3e50" text="Add New Employee" styleClass="page-title">
+                                                            <font>
+                                                                <Font name="System Bold" size="22.0" />
+                                                            </font>
+                                                        </Text>
+                                                    </children>
+                                                </HBox>
+
+                                                <!-- Optimized Form Layout -->
+                                                <VBox spacing="25.0" styleClass="form-container">
+                                                    <children>
+                                                        <!-- Employee Information Section -->
+                                                        <VBox spacing="15.0" styleClass="form-section">
+                                                            <children>
+                                                                <Label text="Employee Information" styleClass="section-label" />
+                                                                <GridPane hgap="20.0" vgap="15.0" styleClass="form-grid">
+                                                                    <children>
+                                                                        <!-- Row 1 -->
+                                                                        <VBox spacing="6.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                                                            <children>
+                                                                                <Label text="Employee ID *" styleClass="field-label" />
+                                                                                <TextField fx:id="id" promptText="e.g., EMP001" styleClass="form-input" />
+                                                                            </children>
+                                                                        </VBox>
+
+                                                                        <VBox spacing="6.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                                                            <children>
+                                                                                <Label text="Full Name *" styleClass="field-label" />
+                                                                                <TextField fx:id="name" promptText="e.g., John Smith" styleClass="form-input" />
+                                                                            </children>
+                                                                        </VBox>
+
+                                                                        <VBox spacing="6.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                                                            <children>
+                                                                                <Label text="Department *" styleClass="field-label" />
+                                                                                <TextField fx:id="department" promptText="e.g., Engineering" styleClass="form-input" />
+                                                                            </children>
+                                                                        </VBox>
+
+                                                                        <!-- Row 2 -->
+                                                                        <VBox spacing="6.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                                                            <children>
+                                                                                <Label text="Annual Salary *" styleClass="field-label" />
+                                                                                <TextField fx:id="salary" promptText="e.g., 75000" styleClass="form-input" />
+                                                                            </children>
+                                                                        </VBox>
+
+                                                                        <VBox spacing="6.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                                            <children>
+                                                                                <Label text="Performance Rating" styleClass="field-label" />
+                                                                                <TextField fx:id="performanceRating" promptText="1-10 scale" styleClass="form-input" />
+                                                                            </children>
+                                                                        </VBox>
+
+                                                                        <VBox spacing="6.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                                            <children>
+                                                                                <Label text="Years of Experience" styleClass="field-label" />
+                                                                                <TextField fx:id="yearsOfExperience" promptText="e.g., 5" styleClass="form-input" />
+                                                                            </children>
+                                                                        </VBox>
+                                                                    </children>
+                                                                </GridPane>
+                                                            </children>
+                                                        </VBox>
+
+                                                        <!-- Status Section -->
+                                                        <VBox spacing="15.0" styleClass="form-section">
+                                                            <children>
+                                                                <Label text="Employment Status" styleClass="section-label" />
+                                                                <HBox alignment="CENTER_LEFT">
+                                                                    <children>
+                                                                        <CheckBox fx:id="isActive" text="✓ Active Employee" styleClass="status-checkbox" />
+                                                                    </children>
+                                                                </HBox>
+                                                            </children>
+                                                        </VBox>
+
+                                                        <!-- Action Section -->
+                                                        <VBox spacing="15.0" styleClass="action-section">
+                                                            <children>
+                                                                <HBox alignment="CENTER" spacing="15.0">
+                                                                    <children>
+                                                                        <Button onAction="#handleEmployeeCreation" prefWidth="180.0" styleClass="primary-action-btn" text="Create Employee" />
+                                                                        <Button onAction="#handleUserCreationFormClearance" prefWidth="120.0" styleClass="secondary-action-btn" text="Clear Form" />
+                                                                    </children>
+                                                                </HBox>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                    </content>
+                                </Tab>
+
+                                <!-- MANAGE EMPLOYEES TAB -->
+                                <Tab styleClass="modern-tab" text="⚙️ Manage Employees">
+                                    <content>
+                                        <VBox spacing="20.0" styleClass="tab-content">
+                                            <padding>
+                                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                            </padding>
+                                            <children>
+                                                <!-- Page Header -->
+                                                <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="page-header">
+                                                    <children>
+                                                        <Circle fill="#ff9800" radius="18.0" styleClass="page-icon" />
+                                                        <Text fill="#2c3e50" text="Manage Employee Records" styleClass="page-title">
+                                                            <font>
+                                                                <Font name="System Bold" size="22.0" />
+                                                            </font>
+                                                        </Text>
+                                                    </children>
+                                                </HBox>
+
+                                                <!-- Update Section -->
+                                                <VBox spacing="15.0" styleClass="management-section">
+                                                    <children>
+                                                        <Label text="Update Employee Information" styleClass="section-label" />
+                                                        <HBox spacing="15.0" alignment="CENTER_LEFT" styleClass="management-controls">
+                                                            <children>
+                                                                <VBox spacing="6.0">
+                                                                    <children>
+                                                                        <Label text="Employee ID" styleClass="field-label" />
+                                                                        <TextField fx:id="updateID" promptText="Enter ID" styleClass="management-input" prefWidth="130.0" />
+                                                                    </children>
+                                                                </VBox>
+
+                                                                <VBox spacing="6.0">
+                                                                    <children>
+                                                                        <Label text="Field to Update" styleClass="field-label" />
+                                                                        <ComboBox fx:id="updateField" prefWidth="160.0" styleClass="management-combo" />
+                                                                    </children>
+                                                                </VBox>
+
+                                                                <VBox spacing="6.0">
+                                                                    <children>
+                                                                        <Label text="New Value" styleClass="field-label" />
+                                                                        <TextField fx:id="newValue" promptText="Enter new value" styleClass="management-input" prefWidth="160.0" />
+                                                                    </children>
+                                                                </VBox>
+
+                                                                <VBox spacing="6.0">
+                                                                    <children>
+                                                                        <Label text=" " />
+                                                                        <Button onAction="#handleUpdateEmployee" styleClass="update-btn" text="Update" prefWidth="100.0" />
+                                                                    </children>
+                                                                </VBox>
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </VBox>
+
+                                                <!-- Delete Section -->
+                                                <VBox spacing="15.0" styleClass="management-section danger-section">
+                                                    <children>
+                                                        <Label text="Remove Employee" styleClass="section-label danger-label" />
+                                                        <HBox spacing="15.0" alignment="CENTER_LEFT" styleClass="management-controls">
+                                                            <children>
+                                                                <VBox spacing="6.0">
+                                                                    <children>
+                                                                        <Label text="Employee ID" styleClass="field-label" />
+                                                                        <TextField fx:id="deleteID" promptText="Enter ID to delete" styleClass="management-input" prefWidth="200.0" />
+                                                                    </children>
+                                                                </VBox>
+
+                                                                <VBox spacing="6.0">
+                                                                    <children>
+                                                                        <Label text=" " />
+                                                                        <Button onAction="#handleDeleteEmployee" styleClass="delete-btn" text="Delete Employee" prefWidth="140.0" />
+                                                                    </children>
+                                                                </VBox>
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                    </content>
+                                </Tab>
+
+                                <!-- SEARCH EMPLOYEE TAB -->
+                                <Tab styleClass="modern-tab" text="🔍 Search Employees">
+                                    <content>
+                                        <VBox spacing="15.0" styleClass="tab-content">
+                                            <padding>
+                                                <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
+                                            </padding>
+                                            <children>
+                                                <!-- Page Header -->
+                                                <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="page-header">
+                                                    <children>
+                                                        <Circle fill="#2196f3" radius="18.0" styleClass="page-icon" />
+                                                        <Text fill="#2c3e50" text="Search &amp; Filter Employees" styleClass="page-title">
+                                                            <font>
+                                                                <Font name="System Bold" size="22.0" />
+                                                            </font>
+                                                        </Text>
+                                                    </children>
+                                                </HBox>
+
+                                                <!-- Search Controls -->
+                                                <HBox spacing="12.0" styleClass="search-bar" alignment="CENTER_LEFT">
+                                                    <children>
+                                                        <VBox spacing="6.0">
+                                                            <children>
+                                                                <Label text="Filter By" styleClass="field-label" />
+                                                                <ComboBox fx:id="searchFilter" prefWidth="120.0" styleClass="search-combo" />
+                                                            </children>
+                                                        </VBox>
+
+                                                        <VBox spacing="6.0">
+                                                            <children>
+                                                                <Label text="Search Term" styleClass="field-label" />
+                                                                <TextField fx:id="searchTerm" promptText="Enter search value" styleClass="search-input" prefWidth="140.0" />
+                                                            </children>
+                                                        </VBox>
+
+                                                        <VBox spacing="6.0">
+                                                            <children>
+                                                                <Label text="Min Value" styleClass="field-label" />
+                                                                <TextField fx:id="minValue" promptText="Min" styleClass="search-input" prefWidth="80.0" />
+                                                            </children>
+                                                        </VBox>
+
+                                                        <VBox spacing="6.0">
+                                                            <children>
+                                                                <Label text="Max Value" styleClass="field-label" />
+                                                                <TextField fx:id="maxValue" promptText="Max" styleClass="search-input" prefWidth="80.0" />
+                                                            </children>
+                                                        </VBox>
+
+                                                        <VBox spacing="6.0">
+                                                            <children>
+                                                                <Label text=" " />
+                                                                <Button onAction="#handleSearchEmployee" styleClass="search-btn" text="🔍 Search" prefWidth="90.0" />
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+
+                                                <!-- Results Table - Maximum Height -->
+                                                <TableView fx:id="searchTable" styleClass="data-table" VBox.vgrow="ALWAYS" prefHeight="450.0">
+                                                    <columns>
+                                                        <TableColumn fx:id="search_IdCol" prefWidth="70.0" text="ID" />
+                                                        <TableColumn fx:id="search_NameCol" prefWidth="180.0" text="NAME" />
+                                                        <TableColumn fx:id="search_DepCol" prefWidth="140.0" text="DEPARTMENT" />
+                                                        <TableColumn fx:id="search_YoeCol" prefWidth="120.0" text="EXPERIENCE" />
+                                                        <TableColumn fx:id="search_PrCol" prefWidth="100.0" text="RATING" />
+                                                        <TableColumn fx:id="search_SalaryCol" prefWidth="120.0" text="SALARY" />
+                                                        <TableColumn fx:id="search_StatusCol" prefWidth="100.0" text="STATUS" />
+                                                    </columns>
+                                                </TableView>
+                                            </children>
+                                        </VBox>
+                                    </content>
+                                </Tab>
+
+                                <!-- SORT EMPLOYEES TAB -->
+                                <Tab styleClass="modern-tab" text="📊 Sort Data">
+                                    <content>
+                                        <VBox spacing="15.0" styleClass="tab-content">
+                                            <padding>
+                                                <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
+                                            </padding>
+                                            <children>
+                                                <!-- Page Header -->
+                                                <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="page-header">
+                                                    <children>
+                                                        <Circle fill="#9c27b0" radius="18.0" styleClass="page-icon" />
+                                                        <Text fill="#2c3e50" text="Sort &amp; Analyze Data" styleClass="page-title">
+                                                            <font>
+                                                                <Font name="System Bold" size="22.0" />
+                                                            </font>
+                                                        </Text>
+                                                    </children>
+                                                </HBox>
+
+                                                <!-- Sort Controls -->
+                                                <HBox spacing="15.0" styleClass="sort-bar" alignment="CENTER_LEFT">
+                                                    <children>
+                                                        <VBox spacing="6.0">
+                                                            <children>
+                                                                <Label text="Sort Criteria" styleClass="field-label" />
+                                                                <ComboBox fx:id="sortFilter" prefWidth="200.0" styleClass="sort-combo" />
+                                                            </children>
+                                                        </VBox>
+
+                                                        <VBox spacing="6.0">
+                                                            <children>
+                                                                <Label text=" " />
+                                                                <Button onAction="#handleSortEmployees" styleClass="sort-btn" text="📊 Sort Data" prefWidth="120.0" />
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+
+                                                <!-- Sort Results Table - Maximum Height -->
+                                                <TableView fx:id="sortTable" styleClass="data-table" VBox.vgrow="ALWAYS" prefHeight="450.0">
+                                                    <columns>
+                                                        <TableColumn fx:id="sort_IdCol" prefWidth="70.0" text="ID" />
+                                                        <TableColumn fx:id="sort_NameCol" prefWidth="180.0" text="NAME" />
+                                                        <TableColumn fx:id="sort_DepCol" prefWidth="140.0" text="DEPARTMENT" />
+                                                        <TableColumn fx:id="sort_YoeCol" prefWidth="120.0" text="EXPERIENCE" />
+                                                        <TableColumn fx:id="sort_PrCol" prefWidth="100.0" text="RATING" />
+                                                        <TableColumn fx:id="sort_SalaryCol" prefWidth="120.0" text="SALARY" />
+                                                        <TableColumn fx:id="sort_StatusCol" prefWidth="100.0" text="STATUS" />
+                                                    </columns>
+                                                </TableView>
+                                            </children>
+                                        </VBox>
+                                    </content>
+                                </Tab>
+
+                                <!-- EMPLOYEE LIST TAB -->
+                                <Tab styleClass="modern-tab" text="👥 Employee Directory">
+                                    <content>
+                                        <VBox spacing="15.0" styleClass="tab-content">
+                                            <padding>
+                                                <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
+                                            </padding>
+                                            <children>
+                                                <!-- Page Header -->
+                                                <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="page-header">
+                                                    <children>
+                                                        <Circle fill="#00bcd4" radius="18.0" styleClass="page-icon" />
+                                                        <Text fill="#2c3e50" text="Complete Employee Directory" styleClass="page-title">
+                                                            <font>
+                                                                <Font name="System Bold" size="22.0" />
+                                                            </font>
+                                                        </Text>
+                                                    </children>
+                                                </HBox>
+
+                                                <!-- Directory Table - Maximum Height -->
+                                                <TableView fx:id="sortTable1" styleClass="data-table" VBox.vgrow="ALWAYS" prefHeight="500.0">
+                                                    <columns>
+                                                        <TableColumn fx:id="emp_IdCol" prefWidth="70.0" text="ID" />
+                                                        <TableColumn fx:id="emp_NameCol" prefWidth="180.0" text="NAME" />
+                                                        <TableColumn fx:id="emp_DepCol" prefWidth="140.0" text="DEPARTMENT" />
+                                                        <TableColumn fx:id="emp_YoeCol" prefWidth="120.0" text="EXPERIENCE" />
+                                                        <TableColumn fx:id="emp_PrCol" prefWidth="100.0" text="RATING" />
+                                                        <TableColumn fx:id="emp_SalaryCol" prefWidth="120.0" text="SALARY" />
+                                                        <TableColumn fx:id="emp_StatusCol" prefWidth="100.0" text="STATUS" />
+                                                    </columns>
+                                                </TableView>
+                                            </children>
+                                        </VBox>
+                                    </content>
+                                </Tab>
+                            </tabs>
+                        </TabPane>
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
     </children>
 </AnchorPane>
